@@ -1,3 +1,4 @@
+C:\Users\James.MSI\Source\Repos\Technologique\Technologique_Website\obj\Debug\Technologique_Website.csproj.CoreCompileInputs.cache
 C:\Users\James.MSI\Source\Repos\Technologique\Technologique_Website\bin\Technologique_Website.dll.config
 C:\Users\James.MSI\Source\Repos\Technologique\Technologique_Website\bin\Technologique_Website.dll
 C:\Users\James.MSI\Source\Repos\Technologique\Technologique_Website\bin\Technologique_Website.pdb
@@ -50,10 +51,6 @@ C:\Users\James.MSI\Source\Repos\Technologique\Technologique_Website\bin\roslyn\v
 C:\Users\James.MSI\Source\Repos\Technologique\Technologique_Website\bin\roslyn\vbc.rsp
 C:\Users\James.MSI\Source\Repos\Technologique\Technologique_Website\bin\roslyn\VBCSCompiler.exe
 C:\Users\James.MSI\Source\Repos\Technologique\Technologique_Website\bin\roslyn\VBCSCompiler.exe.config
-C:\Users\James.MSI\Source\Repos\Technologique\Technologique_Website\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
-C:\Users\James.MSI\Source\Repos\Technologique\Technologique_Website\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\James.MSI\Source\Repos\Technologique\Technologique_Website\obj\Debug\Technologique_Website.csproj.AssemblyReference.cache
-C:\Users\James.MSI\Source\Repos\Technologique\Technologique_Website\obj\Debug\Technologique_Website.csproj.CoreCompileInputs.cache
 C:\Users\James.MSI\Source\Repos\Technologique\Technologique_Website\obj\Debug\Technologique_Website.csproj.CopyComplete
 C:\Users\James.MSI\Source\Repos\Technologique\Technologique_Website\obj\Debug\Technologique_Website.dll
 C:\Users\James.MSI\Source\Repos\Technologique\Technologique_Website\obj\Debug\Technologique_Website.pdb
