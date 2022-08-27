@@ -110,10 +110,6 @@
     <Content Include="bin\roslyn\VBCSCompiler.exe" />
     <Content Include="bin\Technologique_Website.dll" />
     <Content Include="bin\Technologique_Website.pdb" />
-    <Content Include="blog-details.html" />
-    <Content Include="blog.html" />
-    <Content Include="checkout.html" />
-    <Content Include="contact.html" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\elegant-icons.css" />
     <Content Include="css\font-awesome.min.css" />
@@ -190,7 +186,6 @@
     <Content Include="img\product\product-8.jpg" />
     <Content Include="img\product\product-9.jpg" />
     <Content Include="index.aspx" />
-    <Content Include="index.html" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\jquery-3.3.1.min.js" />
     <Content Include="js\jquery-ui.min.js" />
@@ -199,7 +194,6 @@
     <Content Include="js\main.js" />
     <Content Include="js\mixitup.min.js" />
     <Content Include="js\owl.carousel.min.js" />
-    <Content Include="main.html" />
     <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
     <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\csc.exe" />
@@ -260,9 +254,6 @@
     <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\vbc.exe" />
     <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\VBCSCompiler.exe" />
     <Content Include="readme.txt" />
-    <Content Include="shop-details.html" />
-    <Content Include="shop-grid.html" />
-    <Content Include="shoping-cart.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
