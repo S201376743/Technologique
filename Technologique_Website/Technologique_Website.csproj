@@ -110,6 +110,7 @@
     <Content Include="bin\roslyn\VBCSCompiler.exe" />
     <Content Include="bin\Technologique_Website.dll" />
     <Content Include="bin\Technologique_Website.pdb" />
+    <Content Include="blog.aspx" />
     <Content Include="contact.aspx" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\elegant-icons.css" />
@@ -259,6 +260,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="blog.aspx.cs">
+      <DependentUpon>blog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="blog.aspx.designer.cs">
+      <DependentUpon>blog.aspx</DependentUpon>
+    </Compile>
     <Compile Include="contact.aspx.cs">
       <DependentUpon>contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
