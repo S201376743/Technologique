@@ -258,6 +258,7 @@
     <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\vbc.exe" />
     <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\VBCSCompiler.exe" />
     <Content Include="readme.txt" />
+    <Content Include="shop-grid.aspx" />
     <Content Include="shoping-cart.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -298,6 +299,13 @@
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="shop-grid.aspx.cs">
+      <DependentUpon>shop-grid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="shop-grid.aspx.designer.cs">
+      <DependentUpon>shop-grid.aspx</DependentUpon>
+    </Compile>
     <Compile Include="shoping-cart.aspx.cs">
       <DependentUpon>shoping-cart.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
