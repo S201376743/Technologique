@@ -39,44 +39,44 @@
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>First Name<span>*</span></p>
-                                        <input type="text">
+                                        <input type="text" id="txtName" runat="server">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Surname<span>*</span></p>
-                                        <input type="text">
+                                        <input type="text" id="txtSurname" runat="server">
                                     </div>
                                 </div>
                             </div>
                             <div class="checkout__input">
                                 <p>Email<span>*</span></p>
-                                <input type="text">
+                                <input type="text" id="txtEmail" runat="server">
                             </div>
                             <div class="checkout__input">
                                 <p>Address<span>*</span></p>
-                                <input type="text" placeholder="Street Address" class="checkout__input__add">
-                                <input type="text" placeholder="Apartment, suite, unite ect (optinal)">
+                                <input type="text" placeholder="Street Address" class="checkout__input__add" id="txtStreetAddress" runat="server">
+                                <input type="text" placeholder="Complex / Building (optinal)" id="txtApartment" runat="server">
                             </div>
                             <div class="checkout__input">
                                 <p>Town/City<span>*</span></p>
-                                <input type="text">
+                                <input type="text" id="txtTown" runat="server">
                             </div>
                             <div class="checkout__input">
-                                <p>Country/State<span>*</span></p>
-                                <input type="text">
+                                <p>Province<span>*</span></p>
+                                <input type="text" id="txtProvince" runat="server">
                             </div>
                             <div class="checkout__input">
-                                <p>Postcode / ZIP<span>*</span></p>
-                                <input type="text">
+                                <p>Postal Code<span>*</span></p>
+                                <input type="text" id="txtPostalCode" runat="server">
                             </div>
                             <div class="checkout__input">
                                 <p>Password<span>*</span></p>
-                                <input type="text">
+                                <input type="text" id="txtPassword" runat="server">
                             </div>
                             <div class="checkout__input">
                                 <p>Confirm Password<span>*</span></p>
-                                <input type="text">
+                                <input type="text" id="txtConfirmPassword" runat="server">
                             </div>
                           
                              <asp:Button ID="btnRegister" runat="server" Text="Register" />
