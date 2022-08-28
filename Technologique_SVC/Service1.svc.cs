@@ -11,8 +11,43 @@ namespace Technologique_SVC
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class Service1 : IService1
     {
-        public void DoWork()
+        TechnologiqueLinq1DataContext tc = new TechnologiqueLinq1DataContext();
+        public int userLogin(string userEmail, string password)
         {
+           var sysUser = (from u in tc.Users
+                          where u.U_Email.Equals(userEmail) && u.U_Password.Equals(password).Equals(password)
+                          select u).FirstOrDefault();
+
+            if (sysUser != null)
+            {
+                return sysUser.User_Id;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public bool userRegister(string userName, string userSurname, string userEmail, string password)
+        {
+            var newUser = new User
+            {
+                U_Name = userName,
+                U_Surname = userSurname,
+                U_Email = userEmail,
+                U_Password = password
+            };
+            tc.Users.InsertOnSubmit(newUser); 
+            try
+            {
+                tc.SubmitChanges();
+                return true;
+            }
+            catch(Exception e)
+            {
+                e.GetBaseException();
+                return false;
+            }
         }
     }
-}
+} 

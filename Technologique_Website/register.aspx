@@ -79,7 +79,7 @@
                                 <input type="text" id="txtConfirmPassword" runat="server">
                             </div>
                           
-                             <asp:Button ID="btnRegister" runat="server" Text="Register" />
+                             <asp:Button ID="btnRegister" runat="server" Text="Register" OnClick="btnRegister_Click" />
                         </div>
                      
                        

@@ -12,6 +12,9 @@ namespace Technologique_SVC
     public interface IService1
     {
         [OperationContract]
-        void DoWork();
+        bool userRegister (string userName, string userSurname, string userEmail, string password);
+
+        [OperationContract]
+        int userLogin(string userEmail, string password);
     }
 }

@@ -2,23 +2,50 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="TechnologiqueLinq1">
   <DataContextMoniker Name="/TechnologiqueLinq1DataContext" />
   <nestedChildShapes>
-    <classShape Id="251b66a7-c165-448f-b3c4-b21de408fe84" absoluteBounds="5.375, 1.25, 2, 1.5785953776041666">
-      <DataClassMoniker Name="/TechnologiqueLinq1DataContext/Cart" />
-      <nestedChildShapes>
-        <elementListCompartment Id="01d92097-9ae7-4688-853f-a15be4090f76" absoluteBounds="5.3900000000000006, 1.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="1e3de787-327d-4f2d-8854-0dd5863601dc" absoluteBounds="8.5, 1.25, 2, 1.7708968098958331">
+    <classShape Id="528d3277-f68f-4446-aba8-9df8176b2dd0" absoluteBounds="2.875, 6.375, 2, 1.7708968098958331">
       <DataClassMoniker Name="/TechnologiqueLinq1DataContext/Product" />
       <nestedChildShapes>
-        <elementListCompartment Id="c315ea6a-007d-4868-9943-f041624cfe23" absoluteBounds="8.515, 1.71, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="5f8edbd7-c7e7-48b1-8296-d61f3eb21afd" absoluteBounds="2.89, 6.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="bef275e1-cbde-4bb7-9b56-c59970d3dc34" absoluteBounds="1.75, 1.25, 2, 1.9631982421875">
+    <classShape Id="5e0ce5fc-c53e-4466-8bb4-cf7a0be66618" absoluteBounds="7, 6, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/TechnologiqueLinq1DataContext/Cart" />
+      <nestedChildShapes>
+        <elementListCompartment Id="110f9af8-09f6-4d77-b308-32cb897f20e9" absoluteBounds="7.015, 6.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.875 : 6.97679768880208); (7 : 6.97679768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/TechnologiqueLinq1DataContext/Product/Product_Cart" />
+      <nodes>
+        <classShapeMoniker Id="528d3277-f68f-4446-aba8-9df8176b2dd0" />
+        <classShapeMoniker Id="5e0ce5fc-c53e-4466-8bb4-cf7a0be66618" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="9c5846f8-e265-48c2-a7a6-9b7b316ae81f" absoluteBounds="3, 3.375, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/TechnologiqueLinq1DataContext/Address" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6f1e3dee-08cb-4191-8e54-2ab6037d05c6" absoluteBounds="3.015, 3.835, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0c820dcd-6c77-47c3-806d-cb91e7309b4c" absoluteBounds="6.75, 3.5, 2, 1.7708968098958331">
       <DataClassMoniker Name="/TechnologiqueLinq1DataContext/User" />
       <nestedChildShapes>
-        <elementListCompartment Id="f5f7232a-16cc-4406-a9cd-041d67c9c5f0" absoluteBounds="1.7649999999999997, 1.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="6bf2f7dc-2373-40b1-b65d-680ed081f73a" absoluteBounds="6.765, 3.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <associationConnector edgePoints="[(7.875 : 5.27089680989583); (7.875 : 6)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/TechnologiqueLinq1DataContext/User/User_Cart" />
+      <nodes>
+        <classShapeMoniker Id="0c820dcd-6c77-47c3-806d-cb91e7309b4c" />
+        <classShapeMoniker Id="5e0ce5fc-c53e-4466-8bb4-cf7a0be66618" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.75 : 4.38544840494792); (5 : 4.38544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/TechnologiqueLinq1DataContext/User/User_Address" />
+      <nodes>
+        <classShapeMoniker Id="0c820dcd-6c77-47c3-806d-cb91e7309b4c" />
+        <classShapeMoniker Id="9c5846f8-e265-48c2-a7a6-9b7b316ae81f" />
+      </nodes>
+    </associationConnector>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

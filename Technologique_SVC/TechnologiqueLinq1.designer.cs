@@ -33,6 +33,12 @@ namespace Technologique_SVC
     partial void InsertProduct(Product instance);
     partial void UpdateProduct(Product instance);
     partial void DeleteProduct(Product instance);
+    partial void InsertCart(Cart instance);
+    partial void UpdateCart(Cart instance);
+    partial void DeleteCart(Cart instance);
+    partial void InsertAddress(Address instance);
+    partial void UpdateAddress(Address instance);
+    partial void DeleteAddress(Address instance);
     partial void InsertUser(User instance);
     partial void UpdateUser(User instance);
     partial void DeleteUser(User instance);
@@ -68,14 +74,6 @@ namespace Technologique_SVC
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Cart> Carts
-		{
-			get
-			{
-				return this.GetTable<Cart>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Product> Products
 		{
 			get
@@ -84,92 +82,27 @@ namespace Technologique_SVC
 			}
 		}
 		
+		public System.Data.Linq.Table<Cart> Carts
+		{
+			get
+			{
+				return this.GetTable<Cart>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Address> Addresses
+		{
+			get
+			{
+				return this.GetTable<Address>();
+			}
+		}
+		
 		public System.Data.Linq.Table<User> Users
 		{
 			get
 			{
 				return this.GetTable<User>();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Cart")]
-	public partial class Cart
-	{
-		
-		private int _User_Id;
-		
-		private System.Nullable<int> _Product_Id;
-		
-		private string _Paid;
-		
-		private System.Nullable<int> _Cart_Id;
-		
-		public Cart()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_User_Id", DbType="Int NOT NULL")]
-		public int User_Id
-		{
-			get
-			{
-				return this._User_Id;
-			}
-			set
-			{
-				if ((this._User_Id != value))
-				{
-					this._User_Id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Product_Id", DbType="Int")]
-		public System.Nullable<int> Product_Id
-		{
-			get
-			{
-				return this._Product_Id;
-			}
-			set
-			{
-				if ((this._Product_Id != value))
-				{
-					this._Product_Id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Paid", DbType="NChar(10)")]
-		public string Paid
-		{
-			get
-			{
-				return this._Paid;
-			}
-			set
-			{
-				if ((this._Paid != value))
-				{
-					this._Paid = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cart_Id", DbType="Int")]
-		public System.Nullable<int> Cart_Id
-		{
-			get
-			{
-				return this._Cart_Id;
-			}
-			set
-			{
-				if ((this._Cart_Id != value))
-				{
-					this._Cart_Id = value;
-				}
 			}
 		}
 	}
@@ -188,7 +121,9 @@ namespace Technologique_SVC
 		
 		private System.Nullable<int> _Prod_Stock;
 		
-		private System.Nullable<float> _Prod_Price;
+		private System.Nullable<decimal> _Prod_Price;
+		
+		private EntitySet<Cart> _Carts;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -202,16 +137,17 @@ namespace Technologique_SVC
     partial void OnProd_DescriptionChanged();
     partial void OnProd_StockChanging(System.Nullable<int> value);
     partial void OnProd_StockChanged();
-    partial void OnProd_PriceChanging(System.Nullable<float> value);
+    partial void OnProd_PriceChanging(System.Nullable<decimal> value);
     partial void OnProd_PriceChanged();
     #endregion
 		
 		public Product()
 		{
+			this._Carts = new EntitySet<Cart>(new Action<Cart>(this.attach_Carts), new Action<Cart>(this.detach_Carts));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Product_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Product_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int Product_Id
 		{
 			get
@@ -231,7 +167,7 @@ namespace Technologique_SVC
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Prod_Name", DbType="NVarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Prod_Name", DbType="VarChar(150)")]
 		public string Prod_Name
 		{
 			get
@@ -251,7 +187,7 @@ namespace Technologique_SVC
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Prod_Description", DbType="NVarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Prod_Description", DbType="VarChar(MAX)")]
 		public string Prod_Description
 		{
 			get
@@ -291,8 +227,8 @@ namespace Technologique_SVC
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Prod_Price", DbType="Real")]
-		public System.Nullable<float> Prod_Price
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Prod_Price", DbType="Money")]
+		public System.Nullable<decimal> Prod_Price
 		{
 			get
 			{
@@ -307,6 +243,494 @@ namespace Technologique_SVC
 					this._Prod_Price = value;
 					this.SendPropertyChanged("Prod_Price");
 					this.OnProd_PriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_Cart", Storage="_Carts", ThisKey="Product_Id", OtherKey="Product_Id")]
+		public EntitySet<Cart> Carts
+		{
+			get
+			{
+				return this._Carts;
+			}
+			set
+			{
+				this._Carts.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Carts(Cart entity)
+		{
+			this.SendPropertyChanging();
+			entity.Product = this;
+		}
+		
+		private void detach_Carts(Cart entity)
+		{
+			this.SendPropertyChanging();
+			entity.Product = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Cart")]
+	public partial class Cart : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Cart_Id;
+		
+		private int _Product_Id;
+		
+		private string _Paid;
+		
+		private int _User_Id;
+		
+		private EntityRef<Product> _Product;
+		
+		private EntityRef<User> _User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCart_IdChanging(int value);
+    partial void OnCart_IdChanged();
+    partial void OnProduct_IdChanging(int value);
+    partial void OnProduct_IdChanged();
+    partial void OnPaidChanging(string value);
+    partial void OnPaidChanged();
+    partial void OnUser_IdChanging(int value);
+    partial void OnUser_IdChanged();
+    #endregion
+		
+		public Cart()
+		{
+			this._Product = default(EntityRef<Product>);
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cart_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Cart_Id
+		{
+			get
+			{
+				return this._Cart_Id;
+			}
+			set
+			{
+				if ((this._Cart_Id != value))
+				{
+					this.OnCart_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Cart_Id = value;
+					this.SendPropertyChanged("Cart_Id");
+					this.OnCart_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Product_Id", DbType="Int NOT NULL")]
+		public int Product_Id
+		{
+			get
+			{
+				return this._Product_Id;
+			}
+			set
+			{
+				if ((this._Product_Id != value))
+				{
+					if (this._Product.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnProduct_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Product_Id = value;
+					this.SendPropertyChanged("Product_Id");
+					this.OnProduct_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Paid", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string Paid
+		{
+			get
+			{
+				return this._Paid;
+			}
+			set
+			{
+				if ((this._Paid != value))
+				{
+					this.OnPaidChanging(value);
+					this.SendPropertyChanging();
+					this._Paid = value;
+					this.SendPropertyChanged("Paid");
+					this.OnPaidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_User_Id", DbType="Int NOT NULL")]
+		public int User_Id
+		{
+			get
+			{
+				return this._User_Id;
+			}
+			set
+			{
+				if ((this._User_Id != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUser_IdChanging(value);
+					this.SendPropertyChanging();
+					this._User_Id = value;
+					this.SendPropertyChanged("User_Id");
+					this.OnUser_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_Cart", Storage="_Product", ThisKey="Product_Id", OtherKey="Product_Id", IsForeignKey=true)]
+		public Product Product
+		{
+			get
+			{
+				return this._Product.Entity;
+			}
+			set
+			{
+				Product previousValue = this._Product.Entity;
+				if (((previousValue != value) 
+							|| (this._Product.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Product.Entity = null;
+						previousValue.Carts.Remove(this);
+					}
+					this._Product.Entity = value;
+					if ((value != null))
+					{
+						value.Carts.Add(this);
+						this._Product_Id = value.Product_Id;
+					}
+					else
+					{
+						this._Product_Id = default(int);
+					}
+					this.SendPropertyChanged("Product");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Cart", Storage="_User", ThisKey="User_Id", OtherKey="User_Id", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Carts.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Carts.Add(this);
+						this._User_Id = value.User_Id;
+					}
+					else
+					{
+						this._User_Id = default(int);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Address")]
+	public partial class Address : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Address_Id;
+		
+		private string _Street_Address;
+		
+		private string _ComplexBuilding;
+		
+		private string _TownCity;
+		
+		private string _Province;
+		
+		private int _PostalCode;
+		
+		private int _User_id;
+		
+		private EntityRef<User> _User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnAddress_IdChanging(int value);
+    partial void OnAddress_IdChanged();
+    partial void OnStreet_AddressChanging(string value);
+    partial void OnStreet_AddressChanged();
+    partial void OnComplexBuildingChanging(string value);
+    partial void OnComplexBuildingChanged();
+    partial void OnTownCityChanging(string value);
+    partial void OnTownCityChanged();
+    partial void OnProvinceChanging(string value);
+    partial void OnProvinceChanged();
+    partial void OnPostalCodeChanging(int value);
+    partial void OnPostalCodeChanged();
+    partial void OnUser_idChanging(int value);
+    partial void OnUser_idChanged();
+    #endregion
+		
+		public Address()
+		{
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Address_Id
+		{
+			get
+			{
+				return this._Address_Id;
+			}
+			set
+			{
+				if ((this._Address_Id != value))
+				{
+					this.OnAddress_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Address_Id = value;
+					this.SendPropertyChanged("Address_Id");
+					this.OnAddress_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Street_Address", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string Street_Address
+		{
+			get
+			{
+				return this._Street_Address;
+			}
+			set
+			{
+				if ((this._Street_Address != value))
+				{
+					this.OnStreet_AddressChanging(value);
+					this.SendPropertyChanging();
+					this._Street_Address = value;
+					this.SendPropertyChanged("Street_Address");
+					this.OnStreet_AddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ComplexBuilding", DbType="VarChar(100)")]
+		public string ComplexBuilding
+		{
+			get
+			{
+				return this._ComplexBuilding;
+			}
+			set
+			{
+				if ((this._ComplexBuilding != value))
+				{
+					this.OnComplexBuildingChanging(value);
+					this.SendPropertyChanging();
+					this._ComplexBuilding = value;
+					this.SendPropertyChanged("ComplexBuilding");
+					this.OnComplexBuildingChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TownCity", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string TownCity
+		{
+			get
+			{
+				return this._TownCity;
+			}
+			set
+			{
+				if ((this._TownCity != value))
+				{
+					this.OnTownCityChanging(value);
+					this.SendPropertyChanging();
+					this._TownCity = value;
+					this.SendPropertyChanged("TownCity");
+					this.OnTownCityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Province", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string Province
+		{
+			get
+			{
+				return this._Province;
+			}
+			set
+			{
+				if ((this._Province != value))
+				{
+					this.OnProvinceChanging(value);
+					this.SendPropertyChanging();
+					this._Province = value;
+					this.SendPropertyChanged("Province");
+					this.OnProvinceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PostalCode", DbType="Int NOT NULL")]
+		public int PostalCode
+		{
+			get
+			{
+				return this._PostalCode;
+			}
+			set
+			{
+				if ((this._PostalCode != value))
+				{
+					this.OnPostalCodeChanging(value);
+					this.SendPropertyChanging();
+					this._PostalCode = value;
+					this.SendPropertyChanged("PostalCode");
+					this.OnPostalCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_User_id", DbType="Int NOT NULL")]
+		public int User_id
+		{
+			get
+			{
+				return this._User_id;
+			}
+			set
+			{
+				if ((this._User_id != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUser_idChanging(value);
+					this.SendPropertyChanging();
+					this._User_id = value;
+					this.SendPropertyChanged("User_id");
+					this.OnUser_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Address", Storage="_User", ThisKey="User_id", OtherKey="User_Id", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Addresses.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Addresses.Add(this);
+						this._User_id = value.User_Id;
+					}
+					else
+					{
+						this._User_id = default(int);
+					}
+					this.SendPropertyChanged("User");
 				}
 			}
 		}
@@ -340,15 +764,17 @@ namespace Technologique_SVC
 		
 		private int _User_Id;
 		
-		private string _U_Uname;
+		private string _U_Name;
 		
-		private string _U_Pwd;
+		private string _U_Password;
 		
 		private string _U_Email;
 		
-		private System.Nullable<int> _Address_Id;
+		private string _U_Surname;
 		
-		private System.Nullable<int> _Cart_Id;
+		private EntitySet<Cart> _Carts;
+		
+		private EntitySet<Address> _Addresses;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -356,24 +782,24 @@ namespace Technologique_SVC
     partial void OnCreated();
     partial void OnUser_IdChanging(int value);
     partial void OnUser_IdChanged();
-    partial void OnU_UnameChanging(string value);
-    partial void OnU_UnameChanged();
-    partial void OnU_PwdChanging(string value);
-    partial void OnU_PwdChanged();
+    partial void OnU_NameChanging(string value);
+    partial void OnU_NameChanged();
+    partial void OnU_PasswordChanging(string value);
+    partial void OnU_PasswordChanged();
     partial void OnU_EmailChanging(string value);
     partial void OnU_EmailChanged();
-    partial void OnAddress_IdChanging(System.Nullable<int> value);
-    partial void OnAddress_IdChanged();
-    partial void OnCart_IdChanging(System.Nullable<int> value);
-    partial void OnCart_IdChanged();
+    partial void OnU_SurnameChanging(string value);
+    partial void OnU_SurnameChanged();
     #endregion
 		
 		public User()
 		{
+			this._Carts = new EntitySet<Cart>(new Action<Cart>(this.attach_Carts), new Action<Cart>(this.detach_Carts));
+			this._Addresses = new EntitySet<Address>(new Action<Address>(this.attach_Addresses), new Action<Address>(this.detach_Addresses));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_User_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_User_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int User_Id
 		{
 			get
@@ -393,47 +819,47 @@ namespace Technologique_SVC
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_U_Uname", DbType="NVarChar(50)")]
-		public string U_Uname
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_U_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string U_Name
 		{
 			get
 			{
-				return this._U_Uname;
+				return this._U_Name;
 			}
 			set
 			{
-				if ((this._U_Uname != value))
+				if ((this._U_Name != value))
 				{
-					this.OnU_UnameChanging(value);
+					this.OnU_NameChanging(value);
 					this.SendPropertyChanging();
-					this._U_Uname = value;
-					this.SendPropertyChanged("U_Uname");
-					this.OnU_UnameChanged();
+					this._U_Name = value;
+					this.SendPropertyChanged("U_Name");
+					this.OnU_NameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_U_Pwd", DbType="NVarChar(MAX)")]
-		public string U_Pwd
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_U_Password", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string U_Password
 		{
 			get
 			{
-				return this._U_Pwd;
+				return this._U_Password;
 			}
 			set
 			{
-				if ((this._U_Pwd != value))
+				if ((this._U_Password != value))
 				{
-					this.OnU_PwdChanging(value);
+					this.OnU_PasswordChanging(value);
 					this.SendPropertyChanging();
-					this._U_Pwd = value;
-					this.SendPropertyChanged("U_Pwd");
-					this.OnU_PwdChanged();
+					this._U_Password = value;
+					this.SendPropertyChanged("U_Password");
+					this.OnU_PasswordChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_U_Email", DbType="NVarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_U_Email", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
 		public string U_Email
 		{
 			get
@@ -453,43 +879,49 @@ namespace Technologique_SVC
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address_Id", DbType="Int")]
-		public System.Nullable<int> Address_Id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_U_Surname", DbType="VarChar(60) NOT NULL", CanBeNull=false)]
+		public string U_Surname
 		{
 			get
 			{
-				return this._Address_Id;
+				return this._U_Surname;
 			}
 			set
 			{
-				if ((this._Address_Id != value))
+				if ((this._U_Surname != value))
 				{
-					this.OnAddress_IdChanging(value);
+					this.OnU_SurnameChanging(value);
 					this.SendPropertyChanging();
-					this._Address_Id = value;
-					this.SendPropertyChanged("Address_Id");
-					this.OnAddress_IdChanged();
+					this._U_Surname = value;
+					this.SendPropertyChanged("U_Surname");
+					this.OnU_SurnameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cart_Id", DbType="Int")]
-		public System.Nullable<int> Cart_Id
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Cart", Storage="_Carts", ThisKey="User_Id", OtherKey="User_Id")]
+		public EntitySet<Cart> Carts
 		{
 			get
 			{
-				return this._Cart_Id;
+				return this._Carts;
 			}
 			set
 			{
-				if ((this._Cart_Id != value))
-				{
-					this.OnCart_IdChanging(value);
-					this.SendPropertyChanging();
-					this._Cart_Id = value;
-					this.SendPropertyChanged("Cart_Id");
-					this.OnCart_IdChanged();
-				}
+				this._Carts.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Address", Storage="_Addresses", ThisKey="User_Id", OtherKey="User_id")]
+		public EntitySet<Address> Addresses
+		{
+			get
+			{
+				return this._Addresses;
+			}
+			set
+			{
+				this._Addresses.Assign(value);
 			}
 		}
 		
@@ -511,6 +943,30 @@ namespace Technologique_SVC
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_Carts(Cart entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Carts(Cart entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_Addresses(Address entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Addresses(Address entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
 		}
 	}
 }

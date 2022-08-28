@@ -14,9 +14,19 @@ namespace Technologique_Website
         Service1Client sc = new Service1Client();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (txtPassword.Value == txtConfirmPassword.Value)
+            
+        }
+
+        protected void btnRegister_Click(object sender, EventArgs e)
+        {
+            var hashed = Secrecy.HashPassword(txtPassword.Value);
+            bool isRegistered = sc.userRegister(txtName.Value, txtSurname.Value, txtEmail.Value,hashed);
+            if (hashed == txtConfirmPassword.Value)
             {
-                var hashed = Secrecy.HashPassword(txtPassword.Value);
+                if(isRegistered == true)
+                {
+                    Response.Redirect("login.aspx");
+                }
 
             }
         }

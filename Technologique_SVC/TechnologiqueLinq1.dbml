@@ -1,30 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="TechnologiqueDB1" Class="TechnologiqueLinq1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\TechnologiqueDB1.mdf;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="TechnologiqueDB1ConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Cart" Member="Carts">
-    <Type Name="Cart">
-      <Column Name="User_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Product_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Paid" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
-      <Column Name="Cart_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Product" Member="Products">
     <Type Name="Product">
-      <Column Name="Product_Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Prod_Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="Prod_Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Product_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Prod_Name" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="Prod_Description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="Prod_Stock" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Prod_Price" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Prod_Price" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Association Name="Product_Cart" Member="Carts" ThisKey="Product_Id" OtherKey="Product_Id" Type="Cart" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Cart" Member="Carts">
+    <Type Name="Cart">
+      <Column Name="Cart_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Product_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Paid" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="User_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Product_Cart" Member="Product" ThisKey="Product_Id" OtherKey="Product_Id" Type="Product" IsForeignKey="true" />
+      <Association Name="User_Cart" Member="User" ThisKey="User_Id" OtherKey="User_Id" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Address" Member="Addresses">
+    <Type Name="Address">
+      <Column Name="Address_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Street_Address" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ComplexBuilding" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="TownCity" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Province" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="PostalCode" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="User_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="User_Address" Member="User" ThisKey="User_id" OtherKey="User_Id" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.[User]" Member="Users">
     <Type Name="User">
-      <Column Name="User_Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="U_Uname" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="U_Pwd" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="U_Email" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="Address_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Cart_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="User_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="U_Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="U_Password" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="U_Email" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="U_Surname" Type="System.String" DbType="VarChar(60) NOT NULL" CanBeNull="false" />
+      <Association Name="User_Cart" Member="Carts" ThisKey="User_Id" OtherKey="User_Id" Type="Cart" />
+      <Association Name="User_Address" Member="Addresses" ThisKey="User_Id" OtherKey="User_id" Type="Address" />
     </Type>
   </Table>
 </Database>

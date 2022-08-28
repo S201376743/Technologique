@@ -15,11 +15,17 @@ namespace Technologique_Website.ServiceReference1 {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IService1")]
     public interface IService1 {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DoWork", ReplyAction="http://tempuri.org/IService1/DoWorkResponse")]
-        void DoWork();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/userRegister", ReplyAction="http://tempuri.org/IService1/userRegisterResponse")]
+        bool userRegister(string userName, string userSurname, string userEmail, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DoWork", ReplyAction="http://tempuri.org/IService1/DoWorkResponse")]
-        System.Threading.Tasks.Task DoWorkAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/userRegister", ReplyAction="http://tempuri.org/IService1/userRegisterResponse")]
+        System.Threading.Tasks.Task<bool> userRegisterAsync(string userName, string userSurname, string userEmail, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/userLogin", ReplyAction="http://tempuri.org/IService1/userLoginResponse")]
+        int userLogin(string userEmail, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/userLogin", ReplyAction="http://tempuri.org/IService1/userLoginResponse")]
+        System.Threading.Tasks.Task<int> userLoginAsync(string userEmail, string password);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -49,12 +55,20 @@ namespace Technologique_Website.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public void DoWork() {
-            base.Channel.DoWork();
+        public bool userRegister(string userName, string userSurname, string userEmail, string password) {
+            return base.Channel.userRegister(userName, userSurname, userEmail, password);
         }
         
-        public System.Threading.Tasks.Task DoWorkAsync() {
-            return base.Channel.DoWorkAsync();
+        public System.Threading.Tasks.Task<bool> userRegisterAsync(string userName, string userSurname, string userEmail, string password) {
+            return base.Channel.userRegisterAsync(userName, userSurname, userEmail, password);
+        }
+        
+        public int userLogin(string userEmail, string password) {
+            return base.Channel.userLogin(userEmail, password);
+        }
+        
+        public System.Threading.Tasks.Task<int> userLoginAsync(string userEmail, string password) {
+            return base.Channel.userLoginAsync(userEmail, password);
         }
     }
 }
