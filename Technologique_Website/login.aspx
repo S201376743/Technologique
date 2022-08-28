@@ -38,14 +38,14 @@
                             
                             <div class="checkout__input">
                                 <p>Email<span>*</span></p>
-                                <input type="text">
+                                <input type="text" id="txtEmail" runat="server">
                             </div>
                             <div class="checkout__input">
                                 <p>Password<span>*</span></p>
-                                <input type="text">
+                                <input type="text" id="txtPassword" runat="server">
                             </div>
                             
-                                      <asp:Button ID="btnLogin" runat="server" Text="Sign in" />                
+                                      <asp:Button ID="btnLogin" runat="server" Text="Sign in" OnClick="btnLogin_Click" />                
                             
                         </div>
                      

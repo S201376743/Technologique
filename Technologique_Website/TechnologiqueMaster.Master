@@ -54,8 +54,10 @@
                                 <a href="#"><i class="fa fa-pinterest-p"></i></a>
                             </div>
                           
-                            <div class="header__top__right__auth">
+                            <div class="header__top__right__auth" id="changeuser" runat="server">
+                                <a href="register.aspx"><i class="fa fa-user"></i>Register</a>
                                 <a href="login.aspx"><i class="fa fa-user"></i> Login</a>
+                                <a href="logout.aspx" visible="false"><i class="fa fa-user"></i> Logout</a>
                             </div>
                         </div>
                     </div>
