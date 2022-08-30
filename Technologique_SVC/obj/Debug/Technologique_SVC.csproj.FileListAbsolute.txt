@@ -5,3 +5,10 @@ C:\Users\Alien\source\repos\IFM02B2\Technologique\Technologique_SVC\obj\Debug\Te
 C:\Users\Alien\source\repos\IFM02B2\Technologique\Technologique_SVC\obj\Debug\Technologique_SVC.csproj.CoreCompileInputs.cache
 C:\Users\Alien\source\repos\IFM02B2\Technologique\Technologique_SVC\obj\Debug\Technologique_SVC.dll
 C:\Users\Alien\source\repos\IFM02B2\Technologique\Technologique_SVC\obj\Debug\Technologique_SVC.pdb
+C:\Users\James.MSI\source\repos\Technologique\Technologique_SVC\obj\Debug\Technologique_SVC.csproj.CoreCompileInputs.cache
+C:\Users\James.MSI\source\repos\Technologique\Technologique_SVC\bin\Technologique_SVC.dll.config
+C:\Users\James.MSI\source\repos\Technologique\Technologique_SVC\bin\Technologique_SVC.dll
+C:\Users\James.MSI\source\repos\Technologique\Technologique_SVC\bin\Technologique_SVC.pdb
+C:\Users\James.MSI\source\repos\Technologique\Technologique_SVC\obj\Debug\Technologique_SVC.dll
+C:\Users\James.MSI\source\repos\Technologique\Technologique_SVC\obj\Debug\Technologique_SVC.pdb
+C:\Users\James.MSI\source\repos\Technologique\Technologique_SVC\obj\Debug\Technologique_SVC.csproj.AssemblyReference.cache

@@ -49,5 +49,27 @@ namespace Technologique_SVC
                 return false;
             }
         }
+        public bool addProduct(string prodName, string prodDescription, int prodStock, double prodPrice, string imgUrl)
+        {
+            var newProduct = new Product
+            {
+                Prod_Name = prodName,
+                Prod_Description = prodDescription,
+                Prod_Stock = prodStock,
+                Prod_Price = prodPrice,
+                Prod_Image = imgUrl
+            };
+            tc.Products.InsertOnSubmit(newProduct);
+            try
+            {
+                tc.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                e.GetBaseException();
+                return false;
+            }
+        }
     }
 } 

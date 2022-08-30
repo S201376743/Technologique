@@ -111,3 +111,4 @@ C:\Users\Alien\source\repos\IFM02B2\Technologique\Technologique_Website\obj\Debu
 C:\Users\Alien\source\repos\IFM02B2\Technologique\Technologique_Website\obj\Debug\Technologique_Website.csproj.CopyComplete
 C:\Users\Alien\source\repos\IFM02B2\Technologique\Technologique_Website\obj\Debug\Technologique_Website.dll
 C:\Users\Alien\source\repos\IFM02B2\Technologique\Technologique_Website\obj\Debug\Technologique_Website.pdb
+C:\Users\James.MSI\source\repos\Technologique\Technologique_Website\obj\Debug\Technologique_Website.csproj.AssemblyReference.cache

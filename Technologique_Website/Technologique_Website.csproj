@@ -69,6 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AddEditProduct.aspx" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
     <Content Include="bin\roslyn\csc.exe" />
@@ -275,6 +276,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddEditProduct.aspx.cs">
+      <DependentUpon>AddEditProduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddEditProduct.aspx.designer.cs">
+      <DependentUpon>AddEditProduct.aspx</DependentUpon>
+    </Compile>
     <Compile Include="blog-details.aspx.cs">
       <DependentUpon>blog-details.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

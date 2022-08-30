@@ -16,5 +16,8 @@ namespace Technologique_SVC
 
         [OperationContract]
         int userLogin(string userEmail, string password);
+
+        [OperationContract]
+        bool addProduct(string prodName, string prodDescription, int prodStock, double prodPrice, string imgUrl);
     }
 }
